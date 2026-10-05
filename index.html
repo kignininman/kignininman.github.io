@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kignininman Camara | Portfolio Développeur Web</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00f2fe',
+                        secondary: '#4facfe',
+                        dark: {
+                            900: '#0b0f19',
+                            800: '#111827',
+                            700: '#1f2937',
+                            600: '#374151'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            filter: blur(10px);
+        }
+        .glow-effect:hover::before {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200 font-sans antialiased selection:bg-primary selection:text-dark-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-2 font-heading text-xl font-bold tracking-wider text-white group">
+                    <span class="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-dark-900 font-extrabold text-lg shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                        KC
+                    </span>
+                    <span class="hidden sm:inline">CAMARA<span class="text-primary">.dev</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#about" class="hover:text-primary transition-colors">À Propos</a>
+                    <a href="#skills" class="hover:text-primary transition-colors">Compétences</a>
+                    <a href="#journey" class="hover:text-primary transition-colors">Parcours</a>
+                    <a href="#projects" class="hover:text-primary transition-colors">Projets</a>
+                    <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-dark-900 font-semibold text-sm hover:shadow-lg hover:shadow-primary/25 transition-all hover:-translate-y-0.5">
+                        Me Contacter
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white p-2 rounded-lg focus:outline-none" aria-label="Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-gray-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-gray-300 hover:text-primary text-base font-medium">À Propos</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-primary text-base font-medium">Compétences</a>
+            <a href="#journey" class="block py-2 text-gray-300 hover:text-primary text-base font-medium">Parcours</a>
+            <a href="#projects" class="block py-2 text-gray-300 hover:text-primary text-base font-medium">Projets</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-primary text-base font-medium">Contact</a>
+            <a href="#contact" class="inline-block w-full text-center mt-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-dark-900 font-semibold">
+                Me Contacter
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-[90vh] flex items-center justify-center py-20 overflow-hidden">
+            <!-- Background Glow FX -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Content -->
+                    <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-xs sm:text-sm font-medium text-primary border border-primary/20">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span>En recherche de stage de perfectionnement</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-6xl font-extrabold font-heading tracking-tight text-white leading-tight">
+                            Bonjour, je suis <br/>
+                            <span class="text-gradient">KIGNININMAN CAMARA</span>
+                        </h1>
+                        
+                        <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 font-light">
+                            Étudiant en Développement Informatique, passionné par la création d'applications web modernes, performantes et intuitives.
+                        </p>
+
+                        <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="#projects" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-dark-900 font-bold text-base hover:shadow-xl hover:shadow-primary/20 transition-all hover:-translate-y-1 flex items-center gap-2">
+                                <i class="fa-solid fa-code"></i> Voir mes projets
+                            </a>
+                            <a href="#contact" class="px-7 py-3.5 rounded-xl glass-card text-white font-semibold text-base hover:border-primary/50 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-envelope"></i> Me contacter
+                            </a>
+                        </div>
+
+                        <!-- Quick Info Badges -->
+                        <div class="pt-8 border-t border-gray-800/80 flex flex-wrap gap-6 justify-center lg:justify-start text-sm text-gray-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-primary"></i> Abidjan, Côte d'Ivoire
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-graduation-cap text-primary"></i> BTS IDA (2026)
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-envelope text-primary"></i> kignininmancamara1@gmail.com
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Card Profile Display -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-3xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                            
+                            <div class="relative glass-card rounded-3xl p-8 space-y-6 text-center border border-white/10">
+                                <div class="relative mx-auto w-40 h-40 rounded-full p-1 bg-gradient-to-tr from-primary to-secondary shadow-xl">
+                                    <!-- Avatar fallback or avatar photo -->
+                                    <div class="w-full h-full rounded-full bg-dark-800 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-user-astronaut text-6xl text-primary/80"></i>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-bold text-white font-heading">K. CAMARA</h3>
+                                    <p class="text-primary text-sm font-medium">Développeur Web Junior</p>
+                                </div>
+
+                                <div class="bg-dark-900/60 rounded-2xl p-4 text-left space-y-3 text-xs sm:text-sm text-gray-300 border border-gray-800">
+                                    <div class="flex justify-between items-center border-b border-gray-800/60 pb-2">
+                                        <span class="text-gray-400">Statut:</span>
+                                        <span class="text-emerald-400 font-semibold">Admissible BTS IDA</span>
+                                    </div>
+                                    <div class="flex justify-between items-center border-b border-gray-800/60 pb-2">
+                                        <span class="text-gray-400">Spécialité:</span>
+                                        <span class="text-white font-medium">Développement Web</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400">Recherche:</span>
+                                        <span class="text-primary font-medium">Stage pratique</span>
+                                    </div>
+                                </div>
+
+                                <a href="mailto:kignininmancamara1@gmail.com" class="w-full py-3 rounded-xl bg-dark-800 hover:bg-dark-700 text-white font-medium text-sm transition-colors border border-gray-700 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane text-primary"></i> Envoyer un e-mail direct
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 relative bg-dark-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-primary">À Propos De Moi</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Profil & Objectifs</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                    <!-- Presentation Box -->
+                    <div class="glass-card rounded-2xl p-8 space-y-6 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-bold text-white font-heading flex items-center gap-3">
+                                <i class="fa-solid fa-user-gear text-primary"></i> Mon Profil
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed font-light">
+                                Étudiant en développement informatique, motivé et curieux, je suis activement à la recherche d'un stage pour mettre en pratique mes compétences théoriques et techniques en développement web.
+                            </p>
+                            <p class="text-gray-300 leading-relaxed font-light">
+                                Rigoureux, doté d'une forte capacité d'adaptation et apprenant rapidement, j'ai déjà réalisé plusieurs projets web statiques aussi bien dans un cadre académique que personnel.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                            <span class="text-sm text-gray-400">Date de naissance :</span>
+                            <span class="text-sm font-semibold text-white">30 Août 2004</span>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills & Interests Grid -->
+                    <div class="space-y-6 flex flex-col justify-between">
+                        <!-- Soft Skills Card -->
+                        <div class="glass-card rounded-2xl p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-white font-heading flex items-center gap-3">
+                                <i class="fa-solid fa-brain text-primary"></i> Savoir-être / Qualités
+                            </h3>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-dark-900/60 p-3 rounded-xl border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-lightbulb text-amber-400"></i>
+                                    <span class="text-sm text-gray-200">Curiosité</span>
+                                </div>
+                                <div class="bg-dark-900/60 p-3 rounded-xl border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-people-group text-blue-400"></i>
+                                    <span class="text-sm text-gray-200">Esprit d'équipe</span>
+                                </div>
+                                <div class="bg-dark-900/60 p-3 rounded-xl border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-arrows-spin text-emerald-400"></i>
+                                    <span class="text-sm text-gray-200">Adaptabilité</span>
+                                </div>
+                                <div class="bg-dark-900/60 p-3 rounded-xl border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-rocket text-purple-400"></i>
+                                    <span class="text-sm text-gray-200">Apprentissage rapide</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hobbies Card -->
+                        <div class="glass-card rounded-2xl p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-white font-heading flex items-center gap-3">
+                                <i class="fa-solid fa-heart text-primary"></i> Centres d'Intérêt
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-4 py-2 rounded-xl bg-dark-900/80 border border-gray-800 text-sm text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-code text-primary"></i> Programmation passion
+                                </span>
+                                <span class="px-4 py-2 rounded-xl bg-dark-900/80 border border-gray-800 text-sm text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-gamepad text-secondary"></i> Jeux vidéo
+                                </span>
+                                <span class="px-4 py-2 rounded-xl bg-dark-900/80 border border-gray-800 text-sm text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-music text-pink-400"></i> Musique
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-primary">Mon Savoir-Faire</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Compétences & Outils</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Technical Skills Bar -->
+                    <div class="lg:col-span-2 glass-card rounded-2xl p-8 space-y-6">
+                        <h3 class="text-2xl font-bold text-white font-heading mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-laptop-code text-primary"></i> Langages & Technologies
+                        </h3>
+
+                        <div class="space-y-5">
+                            <!-- HTML / CSS -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-html5 text-orange-500 text-lg"></i> HTML5 / CSS3
+                                    </span>
+                                    <span class="text-xs font-semibold text-primary px-2.5 py-1 rounded-full bg-primary/10">Intermédiaire</span>
+                                </div>
+                                <div class="w-full bg-dark-900 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+
+                            <!-- PHP -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-php text-indigo-400 text-lg"></i> PHP
+                                    </span>
+                                    <span class="text-xs font-semibold text-primary px-2.5 py-1 rounded-full bg-primary/10">Intermédiaire</span>
+                                </div>
+                                <div class="w-full bg-dark-900 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+
+                            <!-- SQL -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-database text-blue-400 text-lg"></i> SQL
+                                    </span>
+                                    <span class="text-xs font-semibold text-primary px-2.5 py-1 rounded-full bg-primary/10">Intermédiaire</span>
+                                </div>
+                                <div class="w-full bg-dark-900 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+
+                            <!-- JavaScript -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-js text-yellow-400 text-lg"></i> JavaScript
+                                    </span>
+                                    <span class="text-xs font-semibold text-emerald-400 px-2.5 py-1 rounded-full bg-emerald-400/10">Débutant</span>
+                                </div>
+                                <div class="w-full bg-dark-900 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+
+                            <!-- ReactJS -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium text-gray-200 flex items-center gap-2">
+                                        <i class="fa-brands fa-react text-cyan-400 text-lg"></i> ReactJS
+                                    </span>
+                                    <span class="text-xs font-semibold text-cyan-400 px-2.5 py-1 rounded-full bg-cyan-400/10">Certifié OpenClassrooms</span>
+                                </div>
+                                <div class="w-full bg-dark-900 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Environments -->
+                    <div class="glass-card rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white font-heading mb-6 flex items-center gap-3">
+                                <i class="fa-solid fa-screws-tilting text-primary"></i> Outils de Travail
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 p-3 rounded-xl bg-dark-900/60 border border-gray-800">
+                                    <div class="w-12 h-12 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-code"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">VS Code</p>
+                                        <p class="text-xs text-gray-400">Éditeur de code principal</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-4 p-3 rounded-xl bg-dark-900/60 border border-gray-800">
+                                    <div class="w-12 h-12 rounded-lg bg-amber-600/20 text-amber-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-server"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">phpMyAdmin</p>
+                                        <p class="text-xs text-gray-400">Gestion de bases de données</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-4 p-3 rounded-xl bg-dark-900/60 border border-gray-800">
+                                    <div class="w-12 h-12 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl">
+                                        <i class="fa-solid fa-file-word"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">Microsoft Word</p>
+                                        <p class="text-xs text-gray-400">Bureautique & Documentation</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Languages Badge -->
+                        <div class="mt-6 pt-6 border-t border-gray-800">
+                            <h4 class="text-sm font-semibold text-gray-400 mb-2">Langues parlées :</h4>
+                            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-900 border border-gray-800 text-sm font-medium text-white">
+                                🇫🇷 Français (Courant)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section (Formations & Certifications) -->
+        <section id="journey" class="py-20 relative bg-dark-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-primary">Mon Parcours</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Formations & Certifications</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Academic Education Timeline -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-white font-heading flex items-center gap-3">
+                            <i class="fa-solid fa-graduation-cap text-primary"></i> Diplômes Académiques
+                        </h3>
+
+                        <div class="relative border-l-2 border-gray-800 ml-4 pl-6 space-y-8">
+                            <!-- BTS IDA -->
+                            <div class="relative group">
+                                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-dark-900 group-hover:scale-125 transition-transform"></div>
+                                <div class="glass-card rounded-2xl p-6 space-y-2">
+                                    <span class="text-xs font-bold text-primary tracking-wider uppercase">2026</span>
+                                    <h4 class="text-lg font-bold text-white">Admissibilité BTS Informatique (IDA)</h4>
+                                    <p class="text-sm text-gray-400 font-medium">Informatique, Développeur d'Applications — Groupe LOKO</p>
+                                    <p class="text-xs text-gray-400">Formation approfondie en analyse, programmation et gestion de projets logiciels.</p>
+                                </div>
+                            </div>
+
+                            <!-- Bac D -->
+                            <div class="relative group">
+                                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-secondary border-4 border-dark-900 group-hover:scale-125 transition-transform"></div>
+                                <div class="glass-card rounded-2xl p-6 space-y-2">
+                                    <span class="text-xs font-bold text-secondary tracking-wider uppercase">2023</span>
+                                    <h4 class="text-lg font-bold text-white">Baccalauréat Série D</h4>
+                                    <p class="text-sm text-gray-400 font-medium">Collège Anador Abobo</p>
+                                    <p class="text-xs text-gray-400">Enseignement secondaire axé sur les sciences expérimentales et les mathématiques.</p>
+                                </div>
+                            </div>
+
+                            <!-- BEPC -->
+                            <div class="relative group">
+                                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-gray-600 border-4 border-dark-900 group-hover:scale-125 transition-transform"></div>
+                                <div class="glass-card rounded-2xl p-6 space-y-2">
+                                    <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">2020</span>
+                                    <h4 class="text-lg font-bold text-white">BEPC</h4>
+                                    <p class="text-sm text-gray-400 font-medium">Collège Iris 1</p>
+                                    <p class="text-xs text-gray-400">Brevet d'Études du Premier Cycle.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Online Certifications -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-white font-heading flex items-center gap-3">
+                            <i class="fa-solid fa-certificate text-secondary"></i> Formations en Ligne
+                        </h3>
+
+                        <div class="glass-card rounded-2xl p-8 space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl font-bold">
+                                    OC
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white">OpenClassrooms</h4>
+                                    <p class="text-xs text-gray-400">Auto-formation & certifications web</p>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-gray-300 font-light">
+                                Réalisation de parcours pratiques et validation de modules clés pour renforcer mes bases théoriques en développement moderne :
+                            </p>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-xl bg-dark-900/60 border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary"></i>
+                                    <span class="text-sm text-white font-medium">HTML5 & CSS3</span>
+                                </div>
+                                <div class="p-4 rounded-xl bg-dark-900/60 border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary"></i>
+                                    <span class="text-sm text-white font-medium">JavaScript</span>
+                                </div>
+                                <div class="p-4 rounded-xl bg-dark-900/60 border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary"></i>
+                                    <span class="text-sm text-white font-medium">PHP & SQL</span>
+                                </div>
+                                <div class="p-4 rounded-xl bg-dark-900/60 border border-gray-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-circle-check text-primary"></i>
+                                    <span class="text-sm text-white font-medium">ReactJS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-primary">Mes Réalisations</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Projets Récents</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Project 1: Car Rental -->
+                    <div class="glass-card rounded-2xl overflow-hidden group hover:border-primary/50 transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 bg-gradient-to-tr from-dark-800 to-dark-700 relative flex items-center justify-center p-6 border-b border-gray-800 overflow-hidden">
+                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                <i class="fa-solid fa-car-side text-6xl text-primary/60 group-hover:scale-110 transition-transform duration-500"></i>
+                                <span class="absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
+                                    Projet Personnel
+                                </span>
+                            </div>
+                            
+                            <div class="p-6 space-y-4">
+                                <h3 class="text-xl font-bold text-white font-heading group-hover:text-primary transition-colors">
+                                    Site Vitrine de Location de Voiture
+                                </h3>
+                                <p class="text-sm text-gray-300 leading-relaxed font-light">
+                                    Conception et intégration complète d'un site vitrine pour la présentation et la location de véhicules. Axé sur la structuration propre des pages et la mise en forme responsive.
+                                </p>
+                                
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-3 py-1 rounded-lg bg-dark-900 text-xs font-medium text-gray-300 border border-gray-800">HTML5</span>
+                                    <span class="px-3 py-1 rounded-lg bg-dark-900 text-xs font-medium text-gray-300 border border-gray-800">CSS3</span>
+                                    <span class="px-3 py-1 rounded-lg bg-dark-900 text-xs font-medium text-gray-300 border border-gray-800">Responsive Design</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 pt-0">
+                            <button onclick="showProjectDetails('Car Rental')" class="w-full py-2.5 rounded-xl bg-dark-900 hover:bg-primary hover:text-dark-900 text-white font-medium text-sm transition-all border border-gray-800 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Aperçu de la structure
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: School Class Site -->
+                    <div class="glass-card rounded-2xl overflow-hidden group hover:border-primary/50 transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 bg-gradient-to-tr from-dark-800 to-dark-700 relative flex items-center justify-center p-6 border-b border-gray-800 overflow-hidden">
+                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#4facfe_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                <i class="fa-solid fa-users-rectangle text-6xl text-secondary/60 group-hover:scale-110 transition-transform duration-500"></i>
+                                <span class="absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full bg-secondary/20 text-secondary border border-secondary/30">
+                                    Projet Scolaire
+                                </span>
+                            </div>
+                            
+                            <div class="p-6 space-y-4">
+                                <h3 class="text-xl font-bold text-white font-heading group-hover:text-primary transition-colors">
+                                    Site Statique pour la Classe
+                                </h3>
+                                <p class="text-sm text-gray-300 leading-relaxed font-light">
+                                    Création collective d'un mini-site d'information dans le cadre des cours. Mise en pratique du travail en équipe, du découpage des maquettes et de l'intégration web.
+                                </p>
+                                
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="px-3 py-1 rounded-lg bg-dark-900 text-xs font-medium text-gray-300 border border-gray-800">HTML5</span>
+                                    <span class="px-3 py-1 rounded-lg bg-dark-900 text-xs font-medium text-gray-300 border border-gray-800">CSS3</span>
+                                    <span class="px-3 py-1 rounded-lg bg-dark-900 text-xs font-medium text-gray-300 border border-gray-800">Travail en Équipe</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 pt-0">
+                            <button onclick="showProjectDetails('Class Site')" class="w-full py-2.5 rounded-xl bg-dark-900 hover:bg-secondary hover:text-dark-900 text-white font-medium text-sm transition-all border border-gray-800 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Aperçu de la structure
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 relative bg-dark-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-primary">Travaillons Ensemble</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold font-heading text-white">Me Contacter</p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <!-- Contact Cards -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="glass-card rounded-2xl p-6 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Téléphone</p>
+                                <a href="tel:0717860247" class="text-lg font-bold text-white hover:text-primary transition-colors">07 17 86 02 47</a>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Adresse E-mail</p>
+                                <a href="mailto:kignininmancamara1@gmail.com" class="text-sm sm:text-base font-bold text-white hover:text-primary transition-colors break-all">
+                                    kignininmancamara1@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-400/10 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400">Localisation</p>
+                                <p class="text-lg font-bold text-white">Abidjan, Côte d'Ivoire</p>
+                            </div>
+                        </div>
+
+                        <!-- Certification Declaration -->
+                        <div class="p-6 rounded-2xl bg-dark-900/80 border border-gray-800 text-xs text-gray-400 space-y-2">
+                            <p class="italic">"Je certifie sur l'honneur l'exactitude des informations mentionnées ci-dessus."</p>
+                            <p class="font-semibold text-gray-300">Fait à Abidjan</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-7 glass-card rounded-2xl p-8">
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">Nom complet</label>
+                                    <input type="text" id="name" required placeholder="Votre nom" class="w-full px-4 py-3 rounded-xl bg-dark-900/80 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">Adresse email</label>
+                                    <input type="email" id="email" required placeholder="votre@email.com" class="w-full px-4 py-3 rounded-xl bg-dark-900/80 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">Sujet</label>
+                                <input type="text" id="subject" required placeholder="Proposition de stage / Opportunité" class="w-full px-4 py-3 rounded-xl bg-dark-900/80 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-2">Message</label>
+                                <textarea id="message" rows="4" required placeholder="Bonjour Kignininman, nous aimerions vous proposer..." class="w-full px-4 py-3 rounded-xl bg-dark-900/80 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-primary to-secondary text-dark-900 font-bold text-base hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Envoyer le message
+                            </button>
+                        </form>
+
+                        <div id="form-message" class="hidden mt-4 p-4 rounded-xl text-center text-sm font-medium"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-gray-800/80 py-8 text-center text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>© 2026 Kignininman Camara. Tous droits réservés.</p>
+            <div class="flex gap-4">
+                <a href="#home" class="hover:text-primary transition-colors">Haut de page</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Modal for Project Info -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden bg-dark-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-card rounded-2xl max-w-lg w-full p-6 space-y-4 border border-gray-700 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-white font-heading"></h3>
+            <p id="modal-desc" class="text-sm text-gray-300 font-light"></p>
+            <div class="p-4 bg-dark-900 rounded-xl border border-gray-800 text-xs text-primary font-mono" id="modal-code">
+                <!-- Mock Code Sample -->
+            </div>
+            <button onclick="closeModal()" class="w-full py-2.5 rounded-xl bg-primary text-dark-900 font-bold text-sm">
+                Fermer
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on clicking links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const msgBox = document.getElementById('form-message');
+            msgBox.classList.remove('hidden', 'bg-red-500/20', 'text-red-400');
+            msgBox.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
+            msgBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> Merci pour votre message ! Kignininman vous répondra dans les plus brefs délais.';
+            
+            document.getElementById('contact-form').reset();
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+            }, 6000);
+        }
+
+        // Modal Handler
+        function showProjectDetails(project) {
+            const modal = document.getElementById('project-modal');
+            const title = document.getElementById('modal-title');
+            const desc = document.getElementById('modal-desc');
+            const code = document.getElementById('modal-code');
+
+            if (project === 'Car Rental') {
+                title.innerText = "Location de Voiture (Site Vitrine)";
+                desc.innerText = "Projet personnel orienté expérience utilisateur et mise en valeur de véhicules. Focus sur la structure sémantique HTML5 et la responsiveness CSS3.";
+                code.innerText = `<div class="car-card">\n  <img src="car.jpg" alt="Véhicule">\n  <h3>Berline de Luxe</h3>\n  <button class="btn-rent">Réserver</button>\n</div>`;
+            } else {
+                title.innerText = "Site Statique de Classe";
+                desc.innerText = "Projet de groupe académique visant à regrouper les travaux et plannings de classe. Travail collaboratif sur les standards web.";
+                code.innerText = `<header class="class-header">\n  <h1>Classe BTS IDA 2026</h1>\n  <nav><!-- Navigation classe --></nav>\n</header>`;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
